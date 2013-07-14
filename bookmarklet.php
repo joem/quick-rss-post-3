@@ -6,7 +6,7 @@ include(__DIR__."/nonpublicstuff/classes/template.class.php");
 $templates_dir    = "nonpublicstuff/templates/";
 
 $page = new Template($GLOBALS['templates_dir']."bookmarklet_page.tpl.html");
-$page->set('address_for_bookmarklet', $config['address_for_bookmarklet']);
+$page->set('root_address', $config['root_address']);
 echo $page->output();
 
 ?>

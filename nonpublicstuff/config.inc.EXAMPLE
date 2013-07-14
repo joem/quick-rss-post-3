@@ -10,7 +10,8 @@ $config = array(
     "dbname" => "THE_NAME_OF_THE_DB",
     "username" => "DB_USER_NAME",
     "password" => "DB_PASSWORD"
-  )
+  ),
+  'root_address' => 'http://EXAMPLE.COM/PATH/TO/LOCATION/'
 );
 
 //  Reference the config array with calls like:

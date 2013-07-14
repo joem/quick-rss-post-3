@@ -51,7 +51,7 @@ try {
   foreach($dbh->query('SELECT * FROM posts ORDER BY post_timestamp DESC LIMIT 20') as $row) {
     echo "<item>\n";
     echo " <title>" . $row["post_timestamp"] . " - permalink</title>\n";
-    echo " <link>http://127.0.0.1/~joe/quick-rss-post3/viewpost.php?id=" . $row["id"] . "</link>\n";
+    echo " <link>" . $config['root_address'] . "viewpost.php?id=" . $row["id"] . "</link>\n";
     if ($row["url"]) {
       //TODO: Make URLs into proper links!
 
@@ -68,7 +68,7 @@ try {
       echo " <description>&lt;p&gt;" . $row["note"] . "&lt;/p&gt;</description>\n";
     }
     echo ' <pubDate>' .  date("r", strtotime($row['post_timestamp'])) . "</pubDate>\n";
-    echo " <guid>http://127.0.0.1/~joe/quick-rss-post3/viewpost.php?id=" . $row["id"] . "</guid>\n";
+    echo " <guid>" . $config['root_address'] . "viewpost.php?id=" . $row["id"] . "</guid>\n";
     echo "</item>\n";
   }
   $dbh = null;
