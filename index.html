@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>.</title>
+    <!--
+    <link rel="stylesheet" type="text/css" href="%FIXME%" />
+    <script type="text/javascript" src="%FIXME%"></script>
+    -->
+    <style type="text/css">
+    #main { margin: 0 auto; max-width: 320px; }
+    #main a { float: right; font-size: smaller; color: #bbb; }
+    #main a:hover { color: #444; }
+    input[type="text"], textarea { width: 300px; }
+    textarea { height: 100px; }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <form name="theform" action="insert.php" method="post">
+        <div id="formboxes">
+          <input name="inputbody" type="text" tabindex=2 />
+          <br />
+          <textarea name="textareabody" tabindex=1 placeholder="if you need lots of room, use this box" ></textarea>
+        </div>
+        <!--<a href="#">the bookmarklet</a>-->
+        <a href="javascript:function jqrp1(){window.location.href='http://127.0.0.1/~joe/quick-rss-post3/insert.php?post='+encodeURIComponent(document.location.href)+'&t='+(new Date().getTime())}jqrp1();void(0)">bkmrklt</a>
+        <input type="submit" />
+      </form>
+    </div>
+    <script type="text/javascript" language="JavaScript">
+      document.forms['theform'].elements['textareabody'].focus();
+    </script>
+  </body>
+</html>
+

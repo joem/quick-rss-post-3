@@ -1,0 +1,19 @@
+<?php
+
+// Please copy this to config.inc and then change the values in all caps.
+// Be sure not to commit you config.inc to any public repos or leave it
+// somewhere else where it can be publicly accessed.
+
+$config = array(
+  "db" => array(
+    "host" => "THE_ADDRESS_OF_THE_DB_SERVER",
+    "dbname" => "THE_NAME_OF_THE_DB",
+    "username" => "DB_USER_NAME",
+    "password" => "DB_PASSWORD"
+  )
+);
+
+//  Reference the config array with calls like:
+//    $config['db']['host']
+
+?>
