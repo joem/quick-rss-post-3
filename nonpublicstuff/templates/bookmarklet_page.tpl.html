@@ -12,7 +12,7 @@
     -->
     <style type="text/css">
     #main { margin: 0 auto; max-width: 320px; }
-    #main a { float: right; font-size: smaller; color: #bbb; }
+    #main a { font-size: smaller; color: #bbb; }
     #main a:hover { color: #444; }
     input[type="text"], textarea { width: 300px; }
     textarea { height: 100px; }
@@ -20,20 +20,8 @@
   </head>
   <body>
     <div id="main">
-      <form name="theform" action="insert.php" method="post">
-        <div id="formboxes">
-          <input name="inputbody" type="text" tabindex=2 />
-          <br />
-          <textarea name="textareabody" tabindex=1 placeholder="if you need lots of room, use this box" ></textarea>
-        </div>
-        <!--<a href="#">the bookmarklet</a>-->
-        <a href="bookmarklet.php">bkmrklt page</a>
-        <input type="submit" />
-      </form>
+      <a href="javascript:function jqrp1(){window.location.href='[@address_for_bookmarklet]?post='+encodeURIComponent(document.location.href)+'&t='+(new Date().getTime())}jqrp1();void(0)">bkmrklt</a>
     </div>
-    <script type="text/javascript" language="JavaScript">
-      document.forms['theform'].elements['textareabody'].focus();
-    </script>
   </body>
 </html>
 

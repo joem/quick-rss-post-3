@@ -68,7 +68,7 @@ try {
   $dbh = null;
 } catch (PDOException $e) {
   error_log("Error!: " . $e->getMessage());
-  $page = new Template($GLOBALS['templates_dir']."failure.tpl");
+  $page = new Template($GLOBALS['templates_dir']."failure.tpl.html");
   $page->set("currdate", date("r"));
   $page->set("msg", "Something didn't work right.");
   echo $page->output();
