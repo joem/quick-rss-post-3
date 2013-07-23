@@ -1,4 +1,7 @@
 <?php
+// I'm not entirely certain, but I think this came from:
+// http://www.broculos.net/2008/03/how-to-make-simple-html-template-engine.html
+
 class Template {
   protected $file;
   protected $values = array();
