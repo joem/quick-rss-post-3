@@ -4,6 +4,8 @@ if(empty($_GET)) {
   exit;
 }
 require_once __DIR__.'/nonpublicstuff/config.inc';
+include(__DIR__."/nonpublicstuff/classes/template.class.php");
+$templates_dir    = "nonpublicstuff/templates/";
 
 $id = $_GET['id'];
 
@@ -17,41 +19,31 @@ try {
   $sth->execute($params);
   $row = $sth->fetch(); // just get one row, but that's all i want anyway.
 
-  //TODO: Make this way nicer and prettier... Maybe some sort of 
-  //        typographically-pretty grid based design? And use a template! That'll be
-  //        way easier!
-
-  echo "<html>";
-  echo '<head>';
-  echo " <title>" . $row["post_timestamp"] . " - permalink</title>";
-  echo '</head>';
-  echo '<body>';
-
-  //TODO: Make a nice, simple, but ok-looking format for all this.
-  echo "<p>id: " . $row['id'] . "<br />";
-  echo "timestamp: " . $row['post_timestamp'] . "</p>";
-  //TODO: Need to handle URLs better! For instance, maryhola.com doesn't link right...
-
   if ( $row['url'] ) {
     $display_url = $row['url'];
     if ( !starts_with($row['url'], 'https://') && !starts_with($row['url'], 'http://') ) {
       $display_url = 'http://' . $row['url'];
     }
-    echo "<p>url: <a href=\"" . $display_url . "\">" . $row['url'] . "</a></p>";
+    $link = "<a href=\"" . $display_url . "\">" . $row['url'] . "</a>";
   } else {
-    echo "<p>url: </p>";
+    $link = "";
   }
 
-  //echo "<p>url: <a href=\"" . $row['url'] . "\">" . $row['url'] . "</a></p>";
-  echo "<p>note: " . $row['note'] . "</p>";
+  //TODO: Make the template way nicer and prettier... Maybe some sort of
+  //        typographically-pretty grid based design?
 
-  echo '</body>';
-  echo '</html>';
+  $page = new Template($GLOBALS['templates_dir']."viewpost.tpl.html");
+  $page->set('timestamp', $row["post_timestamp"]);
+  $page->set('id', $row['id']);
+  $page->set('note', $row['note']);
+  $page->set('link', $link);
+  echo $page->output();
 
   $dbh = null;
 } catch (PDOException $e) {
   print "Error!: " . $e->getMessage() . "<br/>";  //DEBUG FIXME: Disable before production!!!
   error_log("Error!: " . $e->getMessage() . "<br/>");
+  $dbh = null;
   die();
 }
 
