@@ -25,17 +25,16 @@ try {
       $display_url = 'http://' . $row['url'];
     }
     $link = "<a href=\"" . $display_url . "\">" . $row['url'] . "</a>";
+    $template = 'viewpost-link.tpl.html';
   } else {
     $link = "";
+    $template = 'viewpost-note.tpl.html';
   }
 
-  //TODO: Make the template way nicer and prettier... Maybe some sort of
-  //        typographically-pretty grid based design?
-
-  $page = new Template($GLOBALS['templates_dir']."viewpost.tpl.html");
+  $page = new Template($GLOBALS['templates_dir'].$template);
   $page->set('timestamp', $row["post_timestamp"]);
   $page->set('id', $row['id']);
-  $page->set('note', $row['note']);
+  $page->set('note', stripslashes($row['note']));
   $page->set('link', $link);
   echo $page->output();
 
