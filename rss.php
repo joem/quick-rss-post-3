@@ -29,6 +29,7 @@ date_default_timezone_set('America/New_York');
 // http://stackoverflow.com/questions/5535514/how-to-fix-warning-from-date-in-php
 
 
+//TODO: Make all this title, link, description stuff for the main feed configurable!!!!!
 echo '<?xml version="1.0"?>
 <rss version="2.0">
 <channel>
@@ -53,17 +54,12 @@ try {
     echo " <title>" . $row["post_timestamp"] . " - permalink</title>\n";
     echo " <link>" . $config['root_address'] . "viewpost.php?id=" . $row["id"] . "</link>\n";
     if ($row["url"]) {
-      //TODO: Make URLs into proper links!
-
-
       $link_url = $row['url'];
       if ( !starts_with($row['url'], 'https://') && !starts_with($row['url'], 'http://') ) {
         $link_url = 'http://' . $row['url'];
       }
       $link = "&lt;p&gt;&lt;a href=&quot;" . $link_url . "&quot;&gt;" . $row['url'] . "&lt;/a&gt;&lt;/p&gt;";
-
       echo " <description>" . $link . "</description>\n";
-      //echo " <description>" . $row["url"] . "</description>\n";
     } else {
       echo " <description>&lt;p&gt;" . $row["note"] . "&lt;/p&gt;</description>\n";
     }
