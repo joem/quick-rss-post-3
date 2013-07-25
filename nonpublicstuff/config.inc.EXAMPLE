@@ -11,7 +11,8 @@ $config = array(
     "username" => "DB_USER_NAME",
     "password" => "DB_PASSWORD"
   ),
-  'root_address' => 'http://EXAMPLE.COM/PATH/TO/LOCATION/'
+  'root_address' => 'http://EXAMPLE.COM/PATH/TO/LOCATION/',
+  'viewing_password' => 'DEFAULTPASSWORD',
 );
 
 //  Reference the config array with calls like:

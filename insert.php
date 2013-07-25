@@ -1,14 +1,10 @@
 <?php
 
+require_once(__DIR__."/nonpublicstuff/classes/jwm_utility.class.php");
+
 // Make the page non-existant if you're not getting to it remotely correctly.
 if(empty($_POST['inputbody']) && empty($_POST['textareabody']) && empty($_GET['post'])) {
-  header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
-  header("Status: 404 Not Found");
-  $_SERVER['REDIRECT_STATUS'] = 404;
-  echo "<h1>404 Not Found</h1>";
-  //readfile('404missing.html');
-  echo "The page that you have requested could not be found.";
-  exit();
+  JwmUtility::fake404();
 }
 
 require_once(__DIR__.'/nonpublicstuff/config.inc');

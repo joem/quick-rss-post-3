@@ -1,10 +1,17 @@
 <?php
 require_once __DIR__.'/nonpublicstuff/config.inc';
-include(__DIR__."/nonpublicstuff/classes/template.class.php");
+require_once(__DIR__."/nonpublicstuff/classes/jwm_utility.class.php");
+require_once(__DIR__."/nonpublicstuff/classes/template.class.php");
 $templates_dir    = "nonpublicstuff/templates/";
 
 $page_template = 'rss-xml.tpl.html';
 $item_template = 'rss-xml-item.tpl.html';
+
+$viewing_password = trim($_GET['pw']);
+
+if ($viewing_password != $config['viewing_password']) {
+  JwmUtility::fake404();
+}
 
 $desired_type = trim($_GET['type']);
 
