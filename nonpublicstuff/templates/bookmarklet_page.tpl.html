@@ -12,7 +12,7 @@
     -->
     <style type="text/css">
     #main { margin: 0 auto; max-width: 320px; }
-    #main a { font-size: smaller; color: #bbb; }
+    #main .insignificant, #main a { font-size: smaller; color: #bbb; }
     #main a:hover { color: #444; }
     input[type="text"], textarea { width: 300px; }
     textarea { height: 100px; }
@@ -20,7 +20,13 @@
   </head>
   <body>
     <div id="main">
-      <a href="javascript:function jqrp1(){window.location.href='[@root_address]insert.php?post='+encodeURIComponent(document.location.href)+'&t='+(new Date().getTime())}jqrp1();void(0)">bkmrklt</a>
+      <p><a href="[@bookmarklet]">bkmrklt lnk</a></p>
+      <p>
+      <form>
+        <span class="insignificant">c'n'p:</span><br />
+        <textarea rows="8" cols="40">[@bookmarklet]</textarea>
+      </form>
+      </p>
     </div>
   </body>
 </html>
