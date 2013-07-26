@@ -1,10 +1,14 @@
 <?php
-if(empty($_GET)) {
-  header ("location:http://google.com");
-  exit;
-}
 require_once __DIR__.'/nonpublicstuff/config.inc';
-include(__DIR__."/nonpublicstuff/classes/template.class.php");
+require_once(__DIR__."/nonpublicstuff/classes/jwm_utility.class.php");
+require_once(__DIR__."/nonpublicstuff/classes/template.class.php");
+
+if(empty($_GET)) {
+  JwmUtility::fake404();
+  //header ("location:http://google.com");
+  //exit;
+}
+
 $templates_dir    = "nonpublicstuff/templates/";
 
 $id = $_GET['id'];
@@ -21,7 +25,7 @@ try {
 
   if ( $row['url'] ) {
     $display_url = $row['url'];
-    if ( !starts_with($row['url'], 'https://') && !starts_with($row['url'], 'http://') ) {
+    if ( !JwmUtility::starts_with($row['url'], 'https://') && !JwmUtility::starts_with($row['url'], 'http://') ) {
       $display_url = 'http://' . $row['url'];
     }
     $link = "<a href=\"" . $display_url . "\">" . $row['url'] . "</a>";
@@ -36,7 +40,6 @@ try {
   $page->set('id', $row['id']);
   $page->set('note', stripslashes($row['note']));
   $page->set('link', $link);
-  echo $page->output();
 
   $dbh = null;
 } catch (PDOException $e) {
@@ -46,8 +49,7 @@ try {
   die();
 }
 
-function starts_with($haystack, $needle) {
-    return strpos($haystack, $needle) === 0;
-}
+echo $page->output();
+
 
 ?>

@@ -9,7 +9,7 @@ $item_template = 'rss-xml-item.tpl.html';
 
 $viewing_password = trim($_GET['pw']);
 
-if ($viewing_password != $config['viewing_password']) {
+if ($viewing_password != $config['rss']['viewing_password']) {
   JwmUtility::fake404();
 }
 
@@ -73,9 +73,9 @@ try {
 
     if ($row["url"]) {
       if ($desired_type == 'html') {
-        $link = '<p><a href="' . ensure_protocol($row['url']) . '">' . $row['url'] . '</a></p>';
+        $link = '<p><a href="' . JwmUtility::ensure_protocol($row['url']) . '">' . $row['url'] . '</a></p>';
       } else {
-        $link = "&lt;p&gt;&lt;a href=&quot;" . ensure_protocol($row['url']) . "&quot;&gt;" . $row['url'] . "&lt;/a&gt;&lt;/p&gt;";
+        $link = "&lt;p&gt;&lt;a href=&quot;" . JwmUtility::ensure_protocol($row['url']) . "&quot;&gt;" . $row['url'] . "&lt;/a&gt;&lt;/p&gt;";
       }
       $item->set("body", $link);
     } else {
@@ -104,18 +104,11 @@ try {
 $page = new Template($GLOBALS['templates_dir'] . $page_template);
 $page->set("items", $items);
 $page->set("latest_post_timestamp_rfc_2822", $latest_post_timestamp_rfc_2822);
+$page->set('name', $config['rss']['name']);
+$page->set('link', $config['rss']['link']);
+$page->set('description', $config['rss']['description']);
 echo $page->output();
 
 
-function starts_with($haystack, $needle) {
-    return strpos($haystack, $needle) === 0;
-}
-
-function ensure_protocol($link_url) {
-  if ( !starts_with($link_url, 'https://') && !starts_with($link_url, 'http://') ) {
-    $link_url = 'http://' . $link_url;
-  }
-  return $link_url;
-}
 
 ?>
