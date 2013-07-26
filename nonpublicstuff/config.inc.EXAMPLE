@@ -9,10 +9,15 @@ $config = array(
     "host" => "THE_ADDRESS_OF_THE_DB_SERVER",
     "dbname" => "THE_NAME_OF_THE_DB",
     "username" => "DB_USER_NAME",
-    "password" => "DB_PASSWORD"
+    "password" => "DB_PASSWORD",
   ),
-  'root_address' => 'http://EXAMPLE.COM/PATH/TO/LOCATION/',
-  'viewing_password' => 'DEFAULTPASSWORD',
+  'rss' => array(
+    'root_address' => 'http://EXAMPLE.COM/PATH/TO/LOCATION/',
+    'viewing_password' => 'DEFAULTPASSWORD',      // Leave blank for no password.
+    'name' => 'NAME OF RSS FEED',
+    'link' => 'http://LINK_ASSOC_WITH_RSS_FEED.COM/',
+    'description' => 'SHORT DESCRIPTION OF RSS FEED',
+  ),
 );
 
 //  Reference the config array with calls like:
