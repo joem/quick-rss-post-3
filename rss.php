@@ -9,6 +9,12 @@ $item_template = 'rss-xml-item.tpl.html';
 
 $viewing_password = trim($_GET['pw']);
 
+$page_number = (int) trim($_GET['page']);
+$page_offset = ($page_number - 1) * $config['rss']['page_limit'];
+if ((int) $page_offset < 0) {
+  $page_offset = 0;
+}
+
 if ($viewing_password != $config['rss']['viewing_password']) {
   JwmUtility::fake404();
 }
@@ -51,9 +57,6 @@ $items = "";
 $latest_post_timestamp_rfc_2822 = "";
 
 
-//TODO: Make all this title, link, description stuff for the main feed configurable!!!!!
-
-
 try {
   $dbh = new PDO("mysql:host=".$config['db']['host'].";dbname=".$config['db']['dbname'], $config['db']['username'], $config['db']['password']);
   $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
@@ -63,8 +66,12 @@ try {
   $first_row = $sth->fetch();
   $latest_post_timestamp_rfc_2822 = date("r", strtotime($first_row['post_timestamp']));
 
+  $sth = $dbh->prepare("SELECT * FROM posts ORDER BY post_timestamp DESC LIMIT :limit OFFSET :offset");
+  $sth->bindValue(':offset', (int) $page_offset, PDO::PARAM_INT);  // Need to cast it like so.
+  $sth->bindValue(':limit', (int) $config['rss']['page_limit'], PDO::PARAM_INT);    // Need to cast it like so.
+  $sth->execute();
 
-  foreach($dbh->query('SELECT * FROM posts ORDER BY post_timestamp DESC LIMIT 20') as $row) {
+  foreach($sth->fetchAll() as $row) {
     // EACH ITEM
     $item = new Template($GLOBALS['templates_dir'] . $item_template);
     $item->set("post_timestamp", $row["post_timestamp"]);

@@ -17,6 +17,7 @@ $config = array(
     'name' => 'NAME OF RSS FEED',
     'link' => 'http://LINK_ASSOC_WITH_RSS_FEED.COM/',
     'description' => 'SHORT DESCRIPTION OF RSS FEED',
+    'page_limit' => 20,   // how many posts show up in the rss feed at a time
   ),
 );
 
