@@ -9,15 +9,14 @@ $item_template = 'rss-xml-item.tpl.html';
 
 $viewing_password = trim($_GET['pw']);
 
-$page_number = (int) trim($_GET['page']);
-$page_offset = ($page_number - 1) * $config['rss']['page_limit'];
-if ((int) $page_offset < 0) {
-  $page_offset = 0;
-}
-
 if ($viewing_password != $config['rss']['viewing_password']) {
   JwmUtility::fake404();
 }
+
+$page_number = (int) trim($_GET['page']);
+if ((int) $page_number < 1)
+  $page_number = 1;
+$page_offset = ($page_number - 1) * $config['rss']['page_limit'];
 
 $desired_type = trim($_GET['type']);
 
@@ -60,6 +59,9 @@ $latest_post_timestamp_rfc_2822 = "";
 try {
   $dbh = new PDO("mysql:host=".$config['db']['host'].";dbname=".$config['db']['dbname'], $config['db']['username'], $config['db']['password']);
   $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+
+  if ($desired_type == 'html')
+    $number_of_rows = $dbh->query('SELECT COUNT(*) FROM posts')->fetchColumn();
 
   $sth = $dbh->query('SELECT * FROM posts ORDER BY post_timestamp DESC LIMIT 1');
   $sth->setFetchMode(PDO::FETCH_ASSOC);
@@ -114,8 +116,11 @@ $page->set("latest_post_timestamp_rfc_2822", $latest_post_timestamp_rfc_2822);
 $page->set('name', $config['rss']['name']);
 $page->set('link', $config['rss']['link']);
 $page->set('description', $config['rss']['description']);
+if ($desired_type == 'html') {
+  $page->set('prev_span', JwmUtility::get_prev_span($page_number));
+  $page->set('next_span', JwmUtility::get_next_span($page_number, $number_of_rows, $config['rss']['page_limit']));
+}
 echo $page->output();
-
 
 
 ?>

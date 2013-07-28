@@ -68,6 +68,14 @@
       padding: 0 6px;
     }
 
+    #pager p {
+      text-align: center;
+    }
+    #pager span#prev {
+    }
+    #pager span#next {
+    }
+
   </style>
 </head>
 <body>
@@ -80,6 +88,12 @@
     <h4>Last Updated: <em>[@latest_post_timestamp_rfc_2822]</em></h4>
 
     [@items]
+
+    <hr />
+
+    <div id="pager">
+      <p><span id="prev">[@prev_span]</span> | <span id="next">[@next_span]</span></p>
+    </div>
 
   </div>
 
