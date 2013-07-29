@@ -9,7 +9,7 @@ Features:
 - Templates for every view/message
 - MySQL storage
 - RSS generated from MySQL
-- Easy viewing of RSS in different formats using type= parameter
+- Easy viewing of RSS in different formats using `type=` parameter
   - `plain`, `text`, `plaintext`, `debug` all work for plain text
   - `xml` for xml, although I'm not sure there's a point
   - `html` for a nicely formatted html view (it even has paging)
@@ -18,7 +18,7 @@ Features:
 - Slighly secure
   - protection against SQL injections
   - when applicable, pages give 404 errors for bad or missing params
-  - rss views needs a configurable password param
+  - rss views need a configurable password param
 
 
 SECURITY WARNING
@@ -52,4 +52,5 @@ Iteration 2 solved (or was going to solve) all (or most) of those issues, and pr
 
 Compared to previous iterations, this current 3rd Iteration is a ground-up rewrite. It stores entries in a database, and has left behind the neat but impossible to work perfectly address-bar-only input scheme. Everything is encoded and/or escaped in the right places now, so you don't have to avoid such useful characters as question marks. And while still very very far from ideal, the code is fairly simple, modular-ish and easy to maintain and configure. (Maybe sometime I'll even add tests!) I'm fairly confident that any future versions I release will all be versions of this iteration.
 
+There probably won't be any more major versions, either, since if I turn it into anything more complex than this, I might as well just be using a proper bookmarking service like Pinboard or a proper short message service like Twitter.
 
